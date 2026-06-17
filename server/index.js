@@ -20,9 +20,8 @@ app.use('/api/dashboard', require('./routes/dashboard'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok', app: 'CLIKZ Billing' }));
 
 mongoose.connect(process.env.MONGODB_URI)
-  .then(async () => {
+  .then(() => {
     console.log('MongoDB connected');
-    await require('./seed')();
   })
   .catch(err => console.error('MongoDB error:', err));
 

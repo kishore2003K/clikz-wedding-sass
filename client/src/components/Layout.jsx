@@ -9,7 +9,6 @@ import clikzLogo from '../assets/clikz_logo.png';
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/invoices', label: 'Invoices', icon: FileText },
-  { to: '/manage', label: 'Manage', icon: Settings },
 ];
 
 export default function Layout() {

@@ -7,7 +7,6 @@ import InvoiceList from './pages/InvoiceList.jsx';
 import NewInvoice from './pages/NewInvoice.jsx';
 import EditInvoice from './pages/EditInvoice.jsx';
 import InvoiceView from './pages/InvoiceView.jsx';
-import Manage from './pages/Manage.jsx';
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -25,7 +24,6 @@ export default function App() {
         <Route path="invoices/new" element={<NewInvoice />} />
         <Route path="invoices/:id/edit" element={<EditInvoice />} />
         <Route path="invoices/:id" element={<InvoiceView />} />
-        <Route path="manage" element={<Manage />} />
       </Route>
     </Routes>
   );
