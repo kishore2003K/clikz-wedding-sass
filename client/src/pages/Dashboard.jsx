@@ -93,7 +93,7 @@ export default function Dashboard() {
                 className="flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors"
               >
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{inv.client?.name}</p>
+                  <p className="text-sm font-medium text-gray-900">{inv.customer?.name}</p>
                   <p className="text-xs text-gray-400">{inv.invoiceNo}</p>
                 </div>
                 <div className="text-right">

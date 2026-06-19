@@ -11,9 +11,9 @@ router.get('/', auth, async (req, res) => {
     if (status) query.status = status;
     if (search) {
       query.$or = [
-        { 'client.name': { $regex: search, $options: 'i' } },
+        { 'customer.name': { $regex: search, $options: 'i' } },
         { invoiceNo: { $regex: search, $options: 'i' } },
-        { 'client.phone': { $regex: search, $options: 'i' } },
+        { 'customer.phone': { $regex: search, $options: 'i' } },
       ];
     }
     const invoices = await Invoice.find(query)

@@ -3,10 +3,10 @@ import api from '../api/axios.js';
 
 const emptyService = { service: '', description: '', price: '', total: 0 };
 
-export default function InvoiceForm({ initial, onSubmit, loading, onClientSelect }) {
+export default function InvoiceForm({ initial, onSubmit, loading, onCustomerSelect }) {
   const [form, setForm] = useState(function () {
     const base = {
-      client: { name: '', phone: '' },
+      customer: { name: '', phone: '' },
       eventCategory: '',
       event: '',
       eventDate: '',
@@ -27,16 +27,16 @@ export default function InvoiceForm({ initial, onSubmit, loading, onClientSelect
       ...base,
       ...initial,
       eventCategory: initial.eventCategory?._id || initial.eventCategory || '',
-      client: initial.client || base.client,
+      customer: initial.customer || base.customer,
       services: initial.services?.length ? initial.services : base.services,
     };
   });
 
   const [eventCategories, setEventCategories] = useState([]);
   const [serviceOptions, setServiceOptions] = useState([]);
-  const [clientSearch, setClientSearch] = useState(initial?.client?.name || '');
-  const [clientSuggestions, setClientSuggestions] = useState([]);
-  const clientTimer = useRef(null);
+  const [customerSearch, setCustomerSearch] = useState(initial?.customer?.name || '');
+  const [customerSuggestions, setCustomerSuggestions] = useState([]);
+  const customerTimer = useRef(null);
   const wrapperRef = useRef(null);
 
   useEffect(function () {
@@ -44,7 +44,7 @@ export default function InvoiceForm({ initial, onSubmit, loading, onClientSelect
 
     function handleClickOutside(event) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setClientSuggestions([]);
+        setCustomerSuggestions([]);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -69,23 +69,23 @@ export default function InvoiceForm({ initial, onSubmit, loading, onClientSelect
   const total = subTotal - Number(form.discount || 0);
   const balance = total - Number(form.advancePaid || 0) - Number(form.totalPaid || 0);
 
-  function searchClients(val) {
-    clearTimeout(clientTimer.current);
-    setClientSearch(val);
-    if (val.length < 2) { setClientSuggestions([]); return; }
-    clientTimer.current = setTimeout(function () {
-      api.get('/clients', { params: { search: val } }).then(function (res) {
-        setClientSuggestions(res.data);
+  function searchCustomers(val) {
+    clearTimeout(customerTimer.current);
+    setCustomerSearch(val);
+    if (val.length < 2) { setCustomerSuggestions([]); return; }
+    customerTimer.current = setTimeout(function () {
+      api.get('/customers', { params: { search: val } }).then(function (res) {
+        setCustomerSuggestions(res.data);
       });
     }, 300);
   }
 
-  function selectClient(c) {
-    clearTimeout(clientTimer.current);
-    setForm(function (f) { return { ...f, client: { name: c.name, phone: c.phone } }; });
-    setClientSearch(c.name);
-    setClientSuggestions([]);
-    if (onClientSelect) onClientSelect(c);
+  function selectCustomer(c) {
+    clearTimeout(customerTimer.current);
+    setForm(function (f) { return { ...f, customer: { name: c.name, phone: c.phone } }; });
+    setCustomerSearch(c.name);
+    setCustomerSuggestions([]);
+    if (onCustomerSelect) onCustomerSelect(c);
   }
 
   function updateService(idx, field, val) {
@@ -144,31 +144,31 @@ export default function InvoiceForm({ initial, onSubmit, loading, onClientSelect
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Client Details */}
+      {/* Customer Details */}
       <div className="card p-5">
-        <h2 className="font-medium text-gray-900 mb-4">Client Details</h2>
+        <h2 className="font-medium text-gray-900 mb-4">Customer Details</h2>
         <div className="grid grid-cols-2 gap-4">
-          {/* Client Name with autocomplete */}
+          {/* Customer Name with autocomplete */}
           <div className="relative" ref={wrapperRef}>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Client Name *</label>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Customer Name *</label>
             <input
               className="input"
-              value={clientSearch}
+              value={customerSearch}
               onChange={function (e) {
-                searchClients(e.target.value);
-                setForm(function (f) { return { ...f, client: { ...f.client, name: e.target.value } }; });
+                searchCustomers(e.target.value);
+                setForm(function (f) { return { ...f, customer: { ...f.customer, name: e.target.value } }; });
               }}
-              placeholder="Search or type client name"
+              placeholder="Search or type customer name"
               required
             />
-            {clientSuggestions.length > 0 && (
+            {customerSuggestions.length > 0 && (
               <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-                {clientSuggestions.map(function (c) {
+                {customerSuggestions.map(function (c) {
                   return (
                     <button
                       key={c._id}
                       type="button"
-                      onClick={function () { selectClient(c); }}
+                      onClick={function () { selectCustomer(c); }}
                       className="w-full text-left px-4 py-2.5 text-sm hover:bg-orange-50 border-b border-gray-50 last:border-0"
                     >
                       <p className="font-medium text-gray-900">{c.name}</p>
@@ -183,8 +183,8 @@ export default function InvoiceForm({ initial, onSubmit, loading, onClientSelect
             <label className="block text-xs font-medium text-gray-600 mb-1">Phone *</label>
             <input
               className="input"
-              value={form.client.phone}
-              onChange={function (e) { setForm(function (f) { return { ...f, client: { ...f.client, phone: e.target.value } }; }); }}
+              value={form.customer.phone}
+              onChange={function (e) { setForm(function (f) { return { ...f, customer: { ...f.customer, phone: e.target.value } }; }); }}
               placeholder="9842209736"
               required
             />

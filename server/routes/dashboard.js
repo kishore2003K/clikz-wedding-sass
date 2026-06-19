@@ -30,7 +30,7 @@ router.get('/', auth, async (req, res) => {
     const recentInvoices = await Invoice.find()
       .sort({ createdAt: -1 })
       .limit(5)
-      .select('invoiceNo client.name total status balance createdAt');
+      .select('invoiceNo customer.name total status balance createdAt');
 
     res.json({
       totalInvoices,

@@ -11,6 +11,7 @@ const navItems = [
   { to: '/invoices', label: 'Invoices', icon: FileText },
   { to: '/master-event', label: 'Master Event', icon: Calendar },
   { to: '/master-service', label: 'Master Service', icon: Briefcase },
+  { to: '/master-customer', label: 'Master Customer', icon: User },
 ];
 
 export default function Layout() {

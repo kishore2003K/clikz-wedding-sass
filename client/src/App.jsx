@@ -9,6 +9,7 @@ import EditInvoice from './pages/EditInvoice.jsx';
 import InvoiceView from './pages/InvoiceView.jsx';
 import MasterEvent from './pages/MasterEvent.jsx';
 import MasterService from './pages/MasterService.jsx';
+import MasterCustomer from './pages/MasterCustomer.jsx';
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="invoices/:id" element={<InvoiceView />} />
         <Route path="master-event" element={<MasterEvent />} />
         <Route path="master-service" element={<MasterService />} />
+        <Route path="master-customer" element={<MasterCustomer />} />
       </Route>
     </Routes>
   );

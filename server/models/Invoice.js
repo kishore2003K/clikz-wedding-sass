@@ -10,7 +10,7 @@ const serviceLineSchema = new mongoose.Schema({
 const invoiceSchema = new mongoose.Schema({
   invoiceNo: { type: String, unique: true },
   date: { type: Date, default: Date.now },
-  client: {
+  customer: {
     name: { type: String, required: true },
     phone: { type: String, required: true },
   },

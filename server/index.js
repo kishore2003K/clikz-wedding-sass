@@ -26,7 +26,7 @@ app.use(async (req, res, next) => {
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/invoices', require('./routes/invoices'));
-app.use('/api/clients', require('./routes/clients'));
+app.use('/api/customers', require('./routes/customers'));
 app.use('/api/services', require('./routes/services'));
 app.use('/api/event-categories', require('./routes/eventCategories'));
 app.use('/api/dashboard', require('./routes/dashboard'));

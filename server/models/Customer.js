@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const clientSchema = new mongoose.Schema({
+const customerSchema = new mongoose.Schema({
   name: { type: String, required: true },
   phone: { type: String, required: true },
   email: { type: String, default: '' },
@@ -10,4 +10,4 @@ const clientSchema = new mongoose.Schema({
   totalBalance: { type: Number, default: 0 },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Client', clientSchema);
+module.exports = mongoose.model('Customer', customerSchema);

@@ -49,7 +49,7 @@ export default function InvoiceList() {
       <div className="flex gap-3 mb-4">
         <input
           className="input max-w-xs"
-          placeholder="Search client, invoice no..."
+          placeholder="Search customer, invoice no..."
           value={search}
           onChange={function (e) { setSearch(e.target.value); }}
         />
@@ -71,7 +71,7 @@ export default function InvoiceList() {
           <thead>
             <tr className="bg-gray-50 border-b border-gray-100">
               <th className="text-left px-5 py-3 text-xs font-medium text-gray-500">Invoice No</th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-gray-500">Client</th>
+              <th className="text-left px-5 py-3 text-xs font-medium text-gray-500">Customer</th>
               <th className="text-left px-5 py-3 text-xs font-medium text-gray-500">Event</th>
               <th className="text-right px-5 py-3 text-xs font-medium text-gray-500">Total</th>
               <th className="text-right px-5 py-3 text-xs font-medium text-gray-500">Balance</th>
@@ -91,8 +91,8 @@ export default function InvoiceList() {
                 <tr key={inv._id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-5 py-3.5 font-mono text-orange-600 font-medium">{inv.invoiceNo}</td>
                   <td className="px-5 py-3.5">
-                    <p className="font-medium text-gray-900">{inv.client?.name}</p>
-                    <p className="text-xs text-gray-400">{inv.client?.phone}</p>
+                    <p className="font-medium text-gray-900">{inv.customer?.name}</p>
+                    <p className="text-xs text-gray-400">{inv.customer?.phone}</p>
                   </td>
                   <td className="px-5 py-3.5 text-gray-600">{inv.event || '—'}</td>
                   <td className="px-5 py-3.5 text-right font-medium">{fmt(inv.total)}</td>

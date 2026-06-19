@@ -122,13 +122,13 @@ export default function InvoiceView() {
         const payments = buildPayments(invoice);
         const totalPaid = sumPayments(payments) || Number(invoice.advancePaid) || 0;
         const msg = encodeURIComponent(
-          `Hi ${invoice.client.name}!\n\nPlease find your invoice *${invoice.invoiceNo}* from CLIKZ Wedding Films attached.\n\n` +
+          `Hi ${invoice.customer.name}!\n\nPlease find your invoice *${invoice.invoiceNo}* from CLIKZ Wedding Films attached.\n\n` +
           `Event: ${invoice.event || 'N/A'}\nLocation: ${invoice.location || 'N/A'}\n\n` +
           `Total: ${fmt(invoice.total)}\nPaid: ${fmt(totalPaid)}\n` +
           (invoice.balance > 0 ? `Balance Due: ${fmt(invoice.balance)}\n` : '') +
           `\nGrateful to be part of your celebration!\nCLIKZ Wedding Films • +91 9994122652`
         );
-        window.open('https://wa.me/91' + invoice.client.phone + '?text=' + msg, '_blank');
+        window.open('https://wa.me/91' + invoice.customer.phone + '?text=' + msg, '_blank');
       }
     } catch (err) {
       if (err.name !== 'AbortError') toast.error('Could not generate PDF');
@@ -241,14 +241,14 @@ export default function InvoiceView() {
           <p style={doc.sectionLabel}>Bill To</p>
           <div style={doc.billGrid}>
             <div style={doc.billField}>
-              <span style={doc.fieldLabel}>Client</span>
-              <span style={doc.fieldValue}>{invoice.client.name}</span>
+              <span style={doc.fieldLabel}>Customer</span>
+              <span style={doc.fieldValue}>{invoice.customer.name}</span>
             </div>
             <div style={doc.billField}>
               <span style={doc.fieldLabel}>
                 <Phone size={10} color="#c0556e" /> Phone
               </span>
-              <span style={doc.fieldValue}>{invoice.client.phone}</span>
+              <span style={doc.fieldValue}>{invoice.customer.phone}</span>
             </div>
             {categoryName && (
               <div style={doc.billField}>
