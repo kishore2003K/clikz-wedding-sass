@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, FileText, Settings, LogOut,
-  Film, Bell, User, Plus, ChevronRight, Sparkles
+  Film, Bell, User, Plus, ChevronRight, Sparkles, Calendar, Briefcase
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import clikzLogo from '../assets/clikz_logo.png';
@@ -9,6 +9,8 @@ import clikzLogo from '../assets/clikz_logo.png';
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/invoices', label: 'Invoices', icon: FileText },
+  { to: '/master-event', label: 'Master Event', icon: Calendar },
+  { to: '/master-service', label: 'Master Service', icon: Briefcase },
 ];
 
 export default function Layout() {
